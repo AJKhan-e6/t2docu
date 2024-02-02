@@ -19,7 +19,9 @@ persistent_path = '/home/abdul/Downloads/text-to-sql/Talk with documentation/sto
 
 # Initialising streamlit page
 st.set_page_config(page_title="Chat with the e6data docs", layout="centered", initial_sidebar_state="auto", menu_items=None)
-openai.api_key="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"
+
+# Add your openai api key here 
+# openai.api_key=
 st.title("Chat with the e6data docs💬")
 
 if "messages" not in st.session_state.keys(): # Initialize the chat messages history
@@ -34,7 +36,7 @@ def load_data(persistent=True):
     
     index = None
     
-    service_context = ServiceContext.from_defaults(llm=OpenAI(temperature=0, model="gpt-4-1106-preview",api_key="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", system_prompt="You are an expert on the e6data documentation and your job is to answer technical questions. Assume that all questions are related to the e6data engine. Keep your answers technical and based on facts – do not hallucinate features."))
+    service_context = ServiceContext.from_defaults(llm=OpenAI(temperature=0, model="gpt-4-1106-preview", system_prompt="You are an expert on the e6data documentation and your job is to answer technical questions. Assume that all questions are related to the e6data engine. Keep your answers technical and based on facts – do not hallucinate features."))
 
     if persistent:
         print("started the loading document process...")
