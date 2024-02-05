@@ -6,7 +6,7 @@ from llama_index import (
     GPTVectorStoreIndex,
     SimpleDirectoryReader,
     ServiceContext,
-    StorageContext, load_index_from_storage
+    StorageContext, load_index_from_storage, set_global_service_context
 )
 from llama_index.storage.docstore import SimpleDocumentStore
 from llama_index.storage.index_store import SimpleIndexStore
@@ -47,6 +47,7 @@ def load_data(persistent=True):
     index = None
     
     service_context = ServiceContext.from_defaults(llm=OpenAI(temperature=0, model="gpt-4-1106-preview", system_prompt=system_prompt))
+    set_global_service_context(service_context=service_context)
 
     if persistent:
         print("started the loading document process...")
