@@ -14,8 +14,18 @@ from llama_index.vector_stores import SimpleVectorStore
 import streamlit as st
 
 
-document_path = '/home/abdul/Downloads/text-to-sql/Talk with documentation/docs/e6-documentation-main'
-persistent_path = '/home/abdul/Downloads/text-to-sql/Talk with documentation/stores'
+#setting up system prompt
+os.getcwd()
+prompt_file=open('system_prompt.txt','r')
+system_prompt=prompt_file.read()
+
+# setting up the documentation path
+document_path = "./docs/e6-documentation-main"
+# document_path = '/home/abdul/Downloads/text-to-sql/Talk with documentation/docs/e6-documentation-main'
+
+# Setting up persistent directory path
+persistent_path = "./stores"
+# persistent_path = '/home/abdul/Downloads/text-to-sql/Talk with documentation/stores'
 
 # Initialising streamlit page
 st.set_page_config(page_title="Chat with the e6data docs", layout="centered", initial_sidebar_state="auto", menu_items=None)
@@ -36,7 +46,7 @@ def load_data(persistent=True):
     
     index = None
     
-    service_context = ServiceContext.from_defaults(llm=OpenAI(temperature=0, model="gpt-4-1106-preview", system_prompt="You are an expert on the e6data documentation and your job is to answer technical questions. Assume that all questions are related to the e6data engine. Keep your answers technical and based on facts – do not hallucinate features."))
+    service_context = ServiceContext.from_defaults(llm=OpenAI(temperature=0, model="gpt-4-1106-preview", system_prompt=system_prompt))
 
     if persistent:
         print("started the loading document process...")
