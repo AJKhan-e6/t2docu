@@ -46,7 +46,7 @@ def load_data(persistent=True):
     
     index = None
     
-    service_context = ServiceContext.from_defaults(llm=OpenAI(temperature=0, model="gpt-4-1106-preview", system_prompt=system_prompt))
+    service_context = ServiceContext.from_defaults(llm=OpenAI(temperature=0, model="gpt-4-1106-preview", system_prompt=system_prompt), chunk_size=512, chunk_overlap=40)
     set_global_service_context(service_context=service_context)
 
     if persistent:
@@ -76,7 +76,7 @@ index = load_data()
 
 
 if "chat_engine" not in st.session_state.keys(): # Initialize the chat engine
-        st.session_state.chat_engine = index.as_chat_engine(chat_mode="condense_question", verbose=True)
+        st.session_state.chat_engine = index.as_chat_engine(chat_mode="condense_question", verbose=True, similarity_top_k=4)
 
 if prompt := st.chat_input("Your question"): # Prompt for user input and save to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
