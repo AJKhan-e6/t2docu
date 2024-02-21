@@ -11,6 +11,7 @@ from llama_index import (
 from llama_index.storage.docstore import SimpleDocumentStore
 from llama_index.storage.index_store import SimpleIndexStore
 from llama_index.vector_stores import SimpleVectorStore
+from llama_index.embeddings.openai import OpenAIEmbedding
 import streamlit as st
 
 
@@ -46,7 +47,7 @@ def load_data(persistent=True):
     
     index = None
     
-    service_context = ServiceContext.from_defaults(llm=OpenAI(temperature=0, model="gpt-4-1106-preview", system_prompt=system_prompt), chunk_size=128, chunk_overlap=60)
+    service_context = ServiceContext.from_defaults(llm=OpenAI(temperature=0, model="gpt-4-1106-preview", system_prompt=system_prompt), embed_model=OpenAIEmbedding(model="text-embedding-3-large"), chunk_size=128, chunk_overlap=60)
     set_global_service_context(service_context=service_context)
 
     if persistent:
