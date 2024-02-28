@@ -2,7 +2,7 @@ Chatbot for interacting with the e6data documentation. Ask your questions, get a
 
 Before you start, please install the pre-requisites 
 ```
-pip install openai llama_index streamlit langchain langchain_openai
+pip install requirements.txt
 ```
 
 Then, get your openAI API key and add it to the code.
